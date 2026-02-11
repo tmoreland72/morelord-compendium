@@ -125,8 +125,10 @@
       }
     ]
   },
-  "description": "",
+  "description": "Morelord Gaming shared compedium for Foundry VTT. Contains a variety of content for D&D 5e, including actors, items, journals, macros, playlists, scenes, and rollable tables.",
   "esmodules": [
     "main.js"
-  ]
+  ],
+  "manifest": "https://raw.githubusercontent.com/tmoreland72/morelord-compendium/master/module.json",
+  "download": "https://github.com/tmoreland72/morelord-compendium/releases/download/v1.0.0/morelord-compendium.zip"
 }
