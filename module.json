@@ -1,0 +1,132 @@
+{
+  "id": "morelord-compendium",
+  "title": "Morelord Compendium",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "authors": [
+    {
+      "name": "Graypes",
+      "discord": "graypes72",
+      "flags": {}
+    }
+  ],
+  "flags": {
+    "canUpload": true
+  },
+  "packs": [
+    {
+      "name": "playlists-1",
+      "label": "Playlists",
+      "path": "packs/playlists-1",
+      "type": "Playlist",
+      "system": "dnd5e",
+      "ownership": {
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "journals-1",
+      "label": "Journals",
+      "path": "packs/journals-1",
+      "type": "JournalEntry",
+      "system": "dnd5e",
+      "ownership": {
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "scenes-1",
+      "label": "Scenes",
+      "path": "packs/scenes-1",
+      "type": "Scene",
+      "system": "dnd5e",
+      "ownership": {
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "tables-1",
+      "label": "Rollable Tables",
+      "path": "packs/tables-1",
+      "type": "RollTable",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "macros-1",
+      "label": "Macros",
+      "path": "packs/macros-1",
+      "type": "Macro",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "items-1",
+      "label": "Items",
+      "path": "packs/items-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "actors-1",
+      "label": "Actors",
+      "path": "packs/actors-1",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Morelord Gaming",
+      "color": "#304354",
+      "sorting": "a",
+      "packs": [
+        "actors-1",
+        "items-1",
+        "journals-1",
+        "macros-1",
+        "playlists-1",
+        "scenes-1",
+        "tables-1"
+      ],
+      "folders": []
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {}
+      }
+    ],
+    "requires": [
+      {
+        "id": "tabletop-rpg-music",
+        "type": "module",
+        "compatibility": {}
+      }
+    ]
+  },
+  "description": "",
+  "esmodules": [
+    "main.js"
+  ]
+}
