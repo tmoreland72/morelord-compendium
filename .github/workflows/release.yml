@@ -1,0 +1,41 @@
+name: Build & Publish Foundry Module
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set variables
+        id: vars
+        run: |
+          echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+          echo "NAME=morelord-compendium" >> $GITHUB_OUTPUT
+
+      # Create a zip that expands to: morelord-compendium/...
+      - name: Create zip asset
+        run: |
+          mkdir -p dist/${{ steps.vars.outputs.NAME }}
+          rsync -a --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'dist' \
+            ./ dist/${{ steps.vars.outputs.NAME }}/
+          (cd dist && zip -r "../${{ steps.vars.outputs.NAME }}.zip" "${{ steps.vars.outputs.NAME }}")
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.vars.outputs.TAG }}
+          generate_release_notes: true
+          files: |
+            ${{ steps.vars.outputs.NAME }}.zip
