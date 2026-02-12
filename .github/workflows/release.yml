@@ -1,4 +1,4 @@
-name: Build & Publish Foundry Module
+name: Build & Publish Foundry Module (auto)
 
 on:
   push:
@@ -9,33 +9,80 @@ permissions:
   contents: write
 
 jobs:
-  release:
+  build-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set variables
+      - name: Derive variables
         id: vars
+        shell: bash
         run: |
-          echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
-          echo "NAME=morelord-compendium" >> $GITHUB_OUTPUT
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"
+          REPO="${GITHUB_REPOSITORY}"
+          NAME="morelord-compendium"
 
-      # Create a zip that expands to: morelord-compendium/...
-      - name: Create zip asset
+          # URLs Foundry will use (immutable per release/tag)
+          MANIFEST_URL="https://raw.githubusercontent.com/${REPO}/${TAG}/module.json"
+          DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${TAG}/${NAME}.zip"
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "manifest=$MANIFEST_URL" >> "$GITHUB_OUTPUT"
+          echo "download=$DOWNLOAD_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Patch module.json for this release
+        shell: bash
         run: |
-          mkdir -p dist/${{ steps.vars.outputs.NAME }}
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require("fs");
+          const path = "module.json";
+          const m = JSON.parse(fs.readFileSync(path, "utf8"));
+
+          const tag = process.env.TAG;
+          const manifest = process.env.MANIFEST;
+          const download = process.env.DOWNLOAD;
+
+          m.version = tag;
+          m.manifest = manifest;
+          m.download = download;
+
+          fs.writeFileSync(path, JSON.stringify(m, null, 2) + "\n", "utf8");
+          console.log("Patched module.json:", { version: m.version, manifest: m.manifest, download: m.download });
+          NODE
+        env:
+          TAG: ${{ steps.vars.outputs.tag }}
+          MANIFEST: ${{ steps.vars.outputs.manifest }}
+          DOWNLOAD: ${{ steps.vars.outputs.download }}
+
+      - name: Build zip with correct folder structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          NAME="${{ steps.vars.outputs.name }}"
+
+          mkdir -p dist/"$NAME"
+
+          # Copy repo contents into dist/<module-id>/, excluding CI/build artifacts
           rsync -a --delete \
             --exclude '.git' \
             --exclude '.github' \
             --exclude 'dist' \
-            ./ dist/${{ steps.vars.outputs.NAME }}/
-          (cd dist && zip -r "../${{ steps.vars.outputs.NAME }}.zip" "${{ steps.vars.outputs.NAME }}")
+            ./ dist/"$NAME"/
 
-      - name: Create GitHub Release and upload asset
+          # Ensure the patched module.json is what goes into the zip
+          cp -f module.json dist/"$NAME"/module.json
+
+          (cd dist && zip -r "../${NAME}.zip" "$NAME")
+
+      - name: Create/Update GitHub Release and upload assets
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.vars.outputs.TAG }}
+          tag_name: ${{ steps.vars.outputs.tag }}
           generate_release_notes: true
           files: |
-            ${{ steps.vars.outputs.NAME }}.zip
+            ${{ steps.vars.outputs.name }}.zip
+            module.json
