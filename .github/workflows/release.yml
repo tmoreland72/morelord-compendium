@@ -1,4 +1,4 @@
-name: Build & Publish Foundry Module (auto)
+name: Foundry Release (tag automated)
 
 on:
   push:
@@ -12,20 +12,22 @@ jobs:
   build-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout master (stable branch)
         uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
 
-      - name: Derive variables
+      - name: Compute URLs from tag
         id: vars
         shell: bash
         run: |
           set -euo pipefail
-          TAG="${GITHUB_REF_NAME}"
+          TAG="${GITHUB_REF_NAME}"             # 1.0.5
           REPO="${GITHUB_REPOSITORY}"
           NAME="morelord-compendium"
 
-          # URLs Foundry will use (immutable per release/tag)
-          MANIFEST_URL="https://raw.githubusercontent.com/${REPO}/${TAG}/module.json"
+          MANIFEST_URL="https://raw.githubusercontent.com/${REPO}/master/module.json"
           DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${TAG}/${NAME}.zip"
 
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
@@ -33,7 +35,7 @@ jobs:
           echo "manifest=$MANIFEST_URL" >> "$GITHUB_OUTPUT"
           echo "download=$DOWNLOAD_URL" >> "$GITHUB_OUTPUT"
 
-      - name: Patch module.json for this release
+      - name: Patch module.json on master
         shell: bash
         run: |
           set -euo pipefail
@@ -42,13 +44,9 @@ jobs:
           const path = "module.json";
           const m = JSON.parse(fs.readFileSync(path, "utf8"));
 
-          const tag = process.env.TAG;
-          const manifest = process.env.MANIFEST;
-          const download = process.env.DOWNLOAD;
-
-          m.version = tag;
-          m.manifest = manifest;
-          m.download = download;
+          m.version = process.env.TAG;
+          m.manifest = process.env.MANIFEST;
+          m.download = process.env.DOWNLOAD;
 
           fs.writeFileSync(path, JSON.stringify(m, null, 2) + "\n", "utf8");
           console.log("Patched module.json:", { version: m.version, manifest: m.manifest, download: m.download });
@@ -58,31 +56,42 @@ jobs:
           MANIFEST: ${{ steps.vars.outputs.manifest }}
           DOWNLOAD: ${{ steps.vars.outputs.download }}
 
-      - name: Build zip with correct folder structure
+      - name: Commit and push module.json to master
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add module.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(release): ${{ steps.vars.outputs.tag }}"
+            git push origin master
+          fi
+
+      - name: Build zip (top-level folder = module id)
         shell: bash
         run: |
           set -euo pipefail
           NAME="${{ steps.vars.outputs.name }}"
 
+          rm -rf dist
           mkdir -p dist/"$NAME"
 
-          # Copy repo contents into dist/<module-id>/, excluding CI/build artifacts
           rsync -a --delete \
             --exclude '.git' \
             --exclude '.github' \
             --exclude 'dist' \
             ./ dist/"$NAME"/
 
-          # Ensure the patched module.json is what goes into the zip
-          cp -f module.json dist/"$NAME"/module.json
-
           (cd dist && zip -r "../${NAME}.zip" "$NAME")
 
-      - name: Create/Update GitHub Release and upload assets
+      - name: Upload zip to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.vars.outputs.tag }}
           generate_release_notes: true
           files: |
             ${{ steps.vars.outputs.name }}.zip
-            module.json
