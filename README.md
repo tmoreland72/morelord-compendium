@@ -14,9 +14,7 @@ Repeat enabling it in each world where it is needed. The packs appear under
 Morelord Gaming in the Compendium sidebar. Import documents into a world when
 world-specific edits are needed; module updates can replace module pack data.
 
-The manifest currently advertises Foundry 13 minimum and verified compatibility.
-The development data has been used with Foundry 14; a fresh-world compatibility
-check is still required before changing the advertised verified version.
+The manifest declares Foundry 14 compatibility and retains Foundry 13 as the minimum. This declaration reflects the personal Foundry 14 development setup; automated package checks passed, but a complete fresh-world interaction test has not been performed.
 See INSTALLATION-NOTES.md for external content and asset requirements.
 
 ## Development and Git
