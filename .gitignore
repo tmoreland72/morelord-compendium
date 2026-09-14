@@ -1,0 +1,13 @@
+# Local credentials and build outputs
+.env
+.env.*
+!.env.example
+*.zip
+.release-*
+node_modules/
+# LevelDB diagnostic files only. Numbered .log files are data: never ignore them.
+packs/*/LOCK
+packs/*/LOG
+packs/*/LOG.old
+.DS_Store
+Thumbs.db

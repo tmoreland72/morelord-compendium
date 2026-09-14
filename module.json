@@ -1,7 +1,7 @@
 {
   "id": "morelord-compendium",
   "title": "Morelord Compendium",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
@@ -90,6 +90,72 @@
         "ASSISTANT": "OWNER"
       },
       "system": "dnd5e"
+    },
+    {
+      "name": "classes-1",
+      "label": "Classes",
+      "path": "packs/classes-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "subclasses-1",
+      "label": "Subclasses",
+      "path": "packs/subclasses-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "backgrounds-1",
+      "label": "Backgrounds",
+      "path": "packs/backgrounds-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "species-1",
+      "label": "Species",
+      "path": "packs/species-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "spells-1",
+      "label": "Spells",
+      "path": "packs/spells-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "feats-1",
+      "label": "Feats",
+      "path": "packs/feats-1",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [
@@ -99,11 +165,17 @@
       "sorting": "a",
       "packs": [
         "actors-1",
+        "backgrounds-1",
+        "classes-1",
+        "feats-1",
         "items-1",
         "journals-1",
         "macros-1",
         "playlists-1",
         "scenes-1",
+        "species-1",
+        "spells-1",
+        "subclasses-1",
         "tables-1"
       ],
       "folders": []
@@ -116,19 +188,13 @@
         "type": "system",
         "compatibility": {}
       }
-    ],
-    "requires": [
-      {
-        "id": "tabletop-rpg-music",
-        "type": "module",
-        "compatibility": {}
-      }
     ]
   },
-  "description": "Morelord Gaming shared compedium for Foundry VTT. Contains a variety of content for D&D 5e, including actors, items, journals, macros, playlists, scenes, and rollable tables.",
+  "description": "Morelord Gaming shared compendium for Foundry VTT. Contains a variety of content for D&D 5e, including actors, items, journals, macros, playlists, scenes, and rollable tables.",
   "esmodules": [
     "main.js"
   ],
   "manifest": "https://raw.githubusercontent.com/tmoreland72/morelord-compendium/master/module.json",
-  "download": "https://github.com/tmoreland72/morelord-compendium/releases/download/1.0.6/morelord-compendium.zip"
+  "download": "https://github.com/tmoreland72/morelord-compendium/archive/refs/heads/master.zip",
+  "url": "https://github.com/tmoreland72/morelord-compendium"
 }

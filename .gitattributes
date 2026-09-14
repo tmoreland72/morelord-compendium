@@ -1,0 +1,12 @@
+* text=auto
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+packs/** binary
+assets/** binary
+
+# Keep development instructions out of GitHub installation archives.
+AGENTS.md export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
