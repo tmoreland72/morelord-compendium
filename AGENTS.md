@@ -36,7 +36,7 @@
 ## Releases and documentation
 
 - Follow the affected repository's documented `release.ps1` workflow, `release.config.json`, and release-note conventions when preparing or publishing a requested release.
-- Character Export follows the standard release requirements. Downtime remains excluded from standard release requirements until production-ready; all modules must follow shared UI and Core asset standards.
+- Character Export and Downtime follow the standard release requirements; all modules must follow shared UI and Core asset standards.
 - As part of every code change, review affected documentation and update it when behavior, UI, settings, APIs, dependencies, or workflows change. Include relevant READMEs, user guides, API examples, and release notes; update shared documentation in Core when applicable.
 - Keep public documentation aligned with actual implemented behavior and compatibility. Documentation review is part of completing the change, not something deferred until release.
 - In the completion summary, identify documentation updated or state why no update was needed.
