@@ -28,12 +28,16 @@ Pack files are marked binary to prevent Git line-ending conversion.
 
 Review `git status` and `git diff`, then commit intended changes and push master.
 
-## GitHub manifest installation without releases
+## GitHub manifest installation and release synchronization
 
 The personal-use workflow is to install through Foundry using the
 manifest URL above, with GitHub generating the download ZIP directly from master.
-No GitHub release, release tag, website publication, or Foundry package-directory
-listing is needed. There is no need to copy the module folder manually.
+The `Sync manifest release` GitHub Action creates a matching version tag and
+release after pushes to master and verifies that GitHub's latest release agrees
+with the manifest. It also runs daily and can be run manually from Actions to
+repair missing metadata. Website publication and a Foundry package-directory
+listing are not part of this personal-use workflow. There is no need to copy the
+module folder manually.
 
 The manifest fields for this workflow are:
 
@@ -47,6 +51,19 @@ The manifest fields for this workflow are:
 Stop Foundry before saving database changes to Git, increment
 module.json's version when an update should be detected, commit the complete
 module changes, and push master. GitHub generates the ZIP from the pushed branch.
+Wait for `Sync manifest release` to pass before considering publication complete.
+The workflow uses the repository's built-in token with contents-write permission;
+no separate publishing secret is needed. It preserves existing tags and release
+notes, refuses conflicting tag versions, draft/prerelease entries and version
+downgrades, and fails visibly on API errors. Review a failed run and rerun it after
+correcting the cause. Do not move an existing version tag to publish new content;
+bump the manifest version instead. Test synchronization logic locally with
+`node --test test/release-sync.test.cjs`.
+
+Release entries record the already-published branch version; they do not certify
+new Foundry compatibility or replace required compatibility verification before
+publishing a new module version. No additional release ZIP is uploaded.
+
 In Foundry Setup, use the module update check to install the newer version.
 For a new Foundry installation, paste the same manifest URL into Install Module.
 For a new world on an installation that already has the module, simply enable it

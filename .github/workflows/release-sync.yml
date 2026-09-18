@@ -1,0 +1,31 @@
+name: Sync manifest release
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+  schedule:
+    - cron: '23 9 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: compendium-release-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          sparse-checkout: |
+            scripts
+            test
+      - run: node --test test/release-sync.test.cjs
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            await require('./scripts/release-sync.cjs')({ github, context, core });
