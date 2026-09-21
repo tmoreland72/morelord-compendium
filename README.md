@@ -14,7 +14,7 @@ Repeat enabling it in each world where it is needed. The packs appear under
 Morelord Gaming in the Compendium sidebar. Import documents into a world when
 world-specific edits are needed; module updates can replace module pack data.
 
-The manifest declares Foundry 14 compatibility and retains Foundry 13 as the minimum. This declaration reflects the personal Foundry 14 development setup; automated package checks passed, but a complete fresh-world interaction test has not been performed.
+The manifest verifies Foundry 14.368 and retains Foundry 13 as the minimum. Representative nonempty compendium indexes and documents were exercised on Foundry 14.368 / D&D5e 6.0.3 in an isolated test world. This does not certify every content item or external asset.
 See INSTALLATION-NOTES.md for external content and asset requirements.
 
 ## Development and Git
@@ -34,7 +34,7 @@ The personal-use workflow is to install through Foundry using the
 manifest URL above, with GitHub generating the download ZIP directly from master.
 The `Sync manifest release` GitHub Action creates a matching version tag and
 release after pushes to master and verifies that GitHub's latest release agrees
-with the manifest. It also runs daily and can be run manually from Actions to
+with the manifest. It can also be run manually from Actions to
 repair missing metadata. Website publication and a Foundry package-directory
 listing are not part of this personal-use workflow. There is no need to copy the
 module folder manually.
