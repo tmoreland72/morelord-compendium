@@ -1,7 +1,7 @@
 {
   "id": "morelord-compendium",
-  "title": "Morelord Compendium",
-  "version": "1.0.9",
+  "title": "Graypes Compendium",
+  "version": "1.0.10",
   "compatibility": {
     "minimum": "13",
     "verified": "14.368"
@@ -160,7 +160,7 @@
   ],
   "packFolders": [
     {
-      "name": "Morelord Gaming",
+      "name": "Graypes Compendium",
       "color": "#304354",
       "sorting": "a",
       "packs": [
@@ -190,7 +190,7 @@
       }
     ]
   },
-  "description": "Morelord Gaming shared compendium for Foundry VTT. Contains a variety of content for D&D 5e, including actors, items, journals, macros, playlists, scenes, and rollable tables.",
+  "description": "Private D&D 5e content collection for Graypes. Independent of the Morelord Gaming tools.",
   "esmodules": [
     "main.js"
   ],

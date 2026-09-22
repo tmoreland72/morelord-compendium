@@ -1,6 +1,6 @@
-# Morelord Compendium
+# Graypes Compendium
 
-Shared D&D 5e compendium packs and the `setAbility` API for Foundry VTT.
+Private D&D 5e compendium packs and the `setAbility` API for Foundry VTT.
 This is a personal-use module. The Dev data-directory copy is the authoritative coding workspace.
 
 ## Install and enable
@@ -9,9 +9,9 @@ In Foundry Setup, choose Add-on Modules > Install Module and paste:
 
 https://raw.githubusercontent.com/tmoreland72/morelord-compendium/master/module.json
 
-Launch a D&D 5e world, open Manage Modules, enable Morelord Compendium, and save.
+Launch a D&D 5e world, open Manage Modules, enable Graypes Compendium, and save.
 Repeat enabling it in each world where it is needed. The packs appear under
-Morelord Gaming in the Compendium sidebar. Import documents into a world when
+the separate top-level Graypes Compendium folder in the Compendium sidebar. Import documents into a world when
 world-specific edits are needed; module updates can replace module pack data.
 
 The manifest verifies Foundry 14.368 and retains Foundry 13 as the minimum. Representative nonempty compendium indexes and documents were exercised on Foundry 14.368 / D&D5e 6.0.3 in an isolated test world. This does not certify every content item or external asset.
@@ -73,3 +73,5 @@ in that world's Manage Modules screen.
 
 `game.modules.get("morelord-compendium").api.setAbility(actor, "str")` rolls 3d6,
 posts the roll to chat, and updates that ability score. It is available after init.
+
+The visible module title and folder are Graypes Compendium. The internal `morelord-compendium` ID, pack names, and document IDs remain unchanged to preserve existing UUID links. This personal collection is not placed beneath or bundled with Morelord Gaming tools. Existing-world folder migration is limited to this module’s packs, preserves other folders and packs, and runs once per world.
