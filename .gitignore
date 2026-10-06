@@ -11,3 +11,4 @@ packs/*/LOG
 packs/*/LOG.old
 .DS_Store
 Thumbs.db
+/tmp/

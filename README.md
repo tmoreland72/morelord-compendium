@@ -75,3 +75,11 @@ in that world's Manage Modules screen.
 posts the roll to chat, and updates that ability score. It is available after init.
 
 The visible module title and folder are Graypes Compendium. The internal `morelord-compendium` ID, pack names, and document IDs remain unchanged to preserve existing UUID links. This personal collection is not placed beneath or bundled with Morelord Gaming tools. Existing-world folder migration is limited to this module’s packs, preserves other folders and packs, and runs once per world.
+
+Release history lives in `release-notes/`; the manifest changelog links there. Temporary working files belong in ignored `/tmp/`. Both directories are excluded from GitHub installation archives.
+
+## Adjust volume of all songs
+
+The **Adjust volume of all songs** macro requires a GM. Its `percent` constant defaults to `25`; accepted values are finite numbers from `0` to `100`. It applies Foundry's audio volume curve to every PlaylistSound in every playlist, including stopped tracks. Edit the constant in an imported copy to choose another level. It changes saved track volumes; it does not start or stop playback. Player use or invalid values shows a warning and leaves tracks unchanged.
+
+In verified Dev1, run `playlistVolumeCheck` from `scripts/testing/playlist-volume.mjs` through Core's shared runner. The check scopes the macro to a disposable native playlist and never changes campaign audio.

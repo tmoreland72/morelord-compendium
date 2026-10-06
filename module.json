@@ -1,7 +1,7 @@
 {
   "id": "morelord-compendium",
   "title": "Graypes Compendium",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "compatibility": {
     "minimum": "13",
     "verified": "14.368"
@@ -194,6 +194,7 @@
   "esmodules": [
     "main.js"
   ],
+  "changelog": "https://github.com/tmoreland72/morelord-compendium/tree/master/release-notes",
   "manifest": "https://raw.githubusercontent.com/tmoreland72/morelord-compendium/master/module.json",
   "download": "https://github.com/tmoreland72/morelord-compendium/archive/refs/heads/master.zip",
   "url": "https://github.com/tmoreland72/morelord-compendium"

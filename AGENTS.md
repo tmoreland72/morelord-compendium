@@ -30,11 +30,15 @@
 
 ## Verification
 
+- Before any in-Foundry testing, verify the loaded world ID is `dev1` (Dev1). If another world is loaded, or its identity cannot be verified, skip all in-Foundry testing without switching worlds. An explicit user instruction to skip testing takes precedence even in Dev1.
+
 - Every in-game bug fix must include a repeatable in-game regression test that reproduces the bug and verifies the corrected behavior. Follow Core's `IN-GAME-TESTING.md`, reuse its shared runner, and keep module-specific tests in the owning module. Run the test in Foundry and report the result or any verification blocker.
 - When changing Core, identify and check the modules that consume the changed functionality.
 - Run relevant existing tests and, for shared UI changes, Core's `npm run check:design-system`. Clearly report anything that still needs live Foundry verification.
 
 ## Releases and documentation
+
+- Keep release notes and changelogs in `release-notes/`. Put temporary scripts, staging folders, browser profiles, and other working files in the owning module's `/tmp/` directory; ignore `/tmp/` in Git and exclude it from release archives. Preserve permanent source, documentation, and regression evidence.
 
 - Campaign Manager is inactive. Exclude it from active-module inventories, release checks, and development planning unless the user explicitly revives it.
 
@@ -43,6 +47,8 @@
 - Character Export and Downtime follow the standard release requirements; all modules must follow shared UI and Core asset standards.
 - As part of every code change, review affected documentation and update it when behavior, UI, settings, APIs, dependencies, or workflows change. Include relevant READMEs, user guides, API examples, and release notes; update shared documentation in Core when applicable.
 - Keep public documentation aligned with actual implemented behavior and compatibility. Documentation review is part of completing the change, not something deferred until release.
+- Document every player-visible and GM-visible page, including each module's Game Settings: explain every field and action using its exact UI label, accepted values/defaults, dependencies, and effect. Put examples in documentation, not helper text. Keep essential UI help concise; Shop Manager uses documentation instead of helper paragraphs. Check field coverage whenever a page or setting changes.
+- Documentation buttons use Core to open the actual module documentation on the Morelord Gaming website in a new browser tab. Keep one documentation source; do not maintain separate in-game summaries.
 - In the completion summary, identify documentation updated or state why no update was needed.
 
 ## Demo videos

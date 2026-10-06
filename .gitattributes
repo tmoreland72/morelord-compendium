@@ -10,3 +10,5 @@ assets/** binary
 AGENTS.md export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
+release-notes/ export-ignore
+tmp/ export-ignore
