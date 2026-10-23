@@ -19,9 +19,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: master
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            scripts
-            test
+            scripts/
+            test/
+            release-notes/
+            module.json
+            CHANGELOG.md
+      - run: node scripts/release-sync.cjs --check
       - run: node --test test/release-sync.test.cjs
       - uses: actions/github-script@v8
         with:

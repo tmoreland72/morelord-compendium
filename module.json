@@ -194,7 +194,7 @@
   "esmodules": [
     "main.js"
   ],
-  "changelog": "https://github.com/tmoreland72/morelord-compendium/tree/master/release-notes",
+  "changelog": "https://github.com/tmoreland72/morelord-compendium/blob/master/CHANGELOG.md",
   "manifest": "https://raw.githubusercontent.com/tmoreland72/morelord-compendium/master/module.json",
   "download": "https://github.com/tmoreland72/morelord-compendium/archive/refs/heads/master.zip",
   "url": "https://github.com/tmoreland72/morelord-compendium"
