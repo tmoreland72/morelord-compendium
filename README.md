@@ -58,7 +58,11 @@ notes, refuses conflicting tag versions, draft/prerelease entries and version
 downgrades, and fails visibly on API errors. Review a failed run and rerun it after
 correcting the cause. Do not move an existing version tag to publish new content;
 bump the manifest version instead. Test synchronization logic locally with
-`node --test test/release-sync.test.cjs`.
+`node --test test/release-sync.test.cjs`. After editing
+`release-notes/RELEASE-NOTES-<version>.md`, regenerate the root changelog with
+`node scripts/release-sync.cjs`. `node scripts/release-sync.cjs --check` fails
+when `CHANGELOG.md` is stale. The release workflow runs that check before it
+publishes, and it does not publish when the changelog is out of date.
 
 Release entries record the already-published branch version; they do not certify
 new Foundry compatibility or replace required compatibility verification before
@@ -76,7 +80,7 @@ posts the roll to chat, and updates that ability score. It is available after in
 
 The visible module title and folder are Graypes Compendium. The internal `morelord-compendium` ID, pack names, and document IDs remain unchanged to preserve existing UUID links. This personal collection is not placed beneath or bundled with Morelord Gaming tools. Existing-world folder migration is limited to this module’s packs, preserves other folders and packs, and runs once per world.
 
-Release history lives in `release-notes/`; the manifest changelog links there. Temporary working files belong in ignored `/tmp/`. Both directories are excluded from GitHub installation archives.
+Per-version release notes live in `release-notes/RELEASE-NOTES-<version>.md` and are excluded from GitHub installation archives. The root `CHANGELOG.md` is the cumulative history, newest version first, and is included in the installed module so in-Foundry changelog viewers and GitHub can read it. The manifest `changelog` field links to that file. Temporary working files belong in ignored `/tmp/`, which is also excluded from installation archives.
 
 ## Adjust volume of all songs
 
