@@ -24,6 +24,7 @@ jobs:
             scripts/
             test/
             release-notes/
+            .gitattributes
             module.json
             CHANGELOG.md
       - run: node scripts/release-sync.cjs --check
