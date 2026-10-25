@@ -14,6 +14,10 @@ Repeat enabling it in each world where it is needed. The packs appear under
 the separate top-level Graypes Compendium folder in the Compendium sidebar. Import documents into a world when
 world-specific edits are needed; module updates can replace module pack data.
 
+The Adventures pack is an empty Adventure compendium for storing adventures.
+Players cannot open it. Assistant GMs own it. Foundry creates `packs/adventures`
+the first time the module loads, so that empty database is not stored in Git.
+
 The manifest verifies Foundry 14.368 and retains Foundry 13 as the minimum. Representative nonempty compendium indexes and documents were exercised on Foundry 14.368 / D&D5e 6.0.3 in an isolated test world. This does not certify every content item or external asset.
 See INSTALLATION-NOTES.md for external content and asset requirements.
 
@@ -24,6 +28,8 @@ The local master branch tracks origin/master and preserves existing history.
 Stop Foundry before committing or packaging packs so LevelDB files are consistent.
 Track the complete packs, including CURRENT, MANIFEST files, .ldb files and
 numbered .log files. Only LOCK, LOG, and LOG.old are disposable diagnostics.
+Leave the Adventures pack out of Git until Foundry has created its database and
+it contains adventures worth saving.
 Pack files are marked binary to prevent Git line-ending conversion.
 
 Review `git status` and `git diff`, then commit intended changes and push master.
