@@ -125,7 +125,7 @@ test('committed CHANGELOG.md matches release notes and stays in the install arch
   assert.deepEqual(result, { updated: false, skipped: false });
   const changelog = fs.readFileSync(path.join(root, 'CHANGELOG.md'), 'utf8');
   const versions = [...changelog.matchAll(/^## (\d+\.\d+\.\d+)$/gm)].map(match => match[1]);
-  assert.deepEqual(versions, ['1.0.11', '1.0.10', '1.0.9']);
+  assert.deepEqual(versions, ['1.0.12', '1.0.11', '1.0.10', '1.0.9']);
   assert.match(changelog, /^# Graypes Compendium Changelog\n/);
   assert.match(changelog, /### Added\n\n- Adjust volume of all songs/);
   assert.match(changelog, /^- Verify the live content/m);

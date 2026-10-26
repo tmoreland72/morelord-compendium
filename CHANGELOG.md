@@ -1,5 +1,11 @@
 # Graypes Compendium Changelog
 
+## 1.0.12
+
+### Added
+
+- Adventures is a new, empty Adventure compendium pack (type Adventure, D&D5e system) in the Graypes Compendium folder. Players have no access; assistants own it. Foundry creates its database the first time the module loads.
+
 ## 1.0.11
 
 ### Added
