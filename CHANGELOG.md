@@ -1,5 +1,13 @@
 # Graypes Compendium Changelog
 
+## 1.0.14
+
+- Added seven items from the Dev Items pack, including four quest items and three Sceptre of Saint Vitruvio variants.
+
+### Compatibility
+
+Foundry 13 remains the minimum and 14.368 remains the verified build. The Items pack was checked offline against the previous release.
+
 ## 1.0.13
 
 - Updated scenes and other compendium packs.
